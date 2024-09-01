@@ -1,10 +1,11 @@
 local endStragePos = 16
 local toolPos = 15
 
-local depth = 0
+
 local unloaded = 0
 local collected = 0
 
+local depth = 0
 local xPos,zPos = 0,0
 local xDir,zDir = 0,1
 
@@ -55,8 +56,8 @@ function selectOres (scan)
       if oreType == nil then
         table.insert(oreTypes, block_data.name)
         table.insert(ores, {})
+        print(block_data.name, "found at:", block_data.x, block_data.y, block_data.z)
       else
-        print("Ore found at:", block_data.x, block_data.y, block_data.z)
         table.insert(ores[oreType], block_data)
       end
     end
