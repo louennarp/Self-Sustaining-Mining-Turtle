@@ -7,12 +7,20 @@ local collected = 0
 
 local depth = 0
 local xPos,zPos = 0,0
-local xDir,zDir = 0,1
+local xDir,zDir = 1,0
 
 local fuelLowLimit, fuelHightLimit = 1000, 3000
 
 local goTo -- Filled in further down
 local refuel -- Filled in further down
+
+local function local_to_global (bX, bY, bZ)
+  local x, y, z
+  y = depth - bY
+  x = xPos + bZ * xDir - bX * zDir
+  z = zPos + bZ * zDir + bX *  xDir
+  return x, y, z
+end
 
 local function scan(n)
   local initSlot = turtle.getSelectedSlot()
@@ -24,6 +32,25 @@ local function scan(n)
   turtle.equipLeft()
   turtle.select(initSlot)
 
+  for i, block_data in ipairs(scan) do
+    block_data.x, block_data.y, block_data.z = local_to_global(block_data.x, block_data.y, block_data.z)
+  end
+  return scan
+end
+
+local function calibratDir()
+  local initSlot = turtle.getSelectedSlot()
+  turtle.select(toolPos)
+  turtle.equipLeft()
+
+  local compas = peripheral.find("geoScanner")
+  local scan = geoscanner.scan(10)
+  turtle.equipLeft()
+  turtle.select(initSlot)
+
+  for i, block_data in ipairs(scan) do
+    block_data.x, block_data.y, block_data.z = local_to_global(block_data.x, block_data.y, block_data.z)
+  end
   return scan
 end
 
