@@ -309,7 +309,9 @@ end
 
 function goMineBlocks(blocks)
   for i, ores in ipairs(blocks) do
-    print(">>>",ores[1].name)
+    if ores[1] then
+      print(">>>", ores[1].name)
+    end
     for j, block_data in ipairs(ores) do
       goTo(block_data.x, block_data.y, block_data.z)
     end
