@@ -16,7 +16,7 @@ local refuel -- Filled in further down
 
 local function local_to_global(bX, bY, bZ)
   local globalX, globalY, globalZ
-  if xDir == 0 then
+  if xDir ~= 0 then
     print("@1")
     globalX = xPos + bX -- * xDir + bZ * zDir
     globalY = depth - bY
