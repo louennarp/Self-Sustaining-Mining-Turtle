@@ -402,7 +402,7 @@ local function getDir()
   turnLeft()
   turtle.dig()
   turnLeft()
-  local scaneOne = scan(2)
+  local scan = scan(2)
 
   for i, block_data in ipairs(scan) do
     if math.abs(block_data.x) + math.abs(block_data.z) == 1 then
@@ -411,7 +411,6 @@ local function getDir()
     end
   end
   return nil
-
 end
 
 function main()
