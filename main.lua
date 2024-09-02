@@ -319,9 +319,9 @@ function goTo( x, y, z, xd, zd )
 end
 
 function goMineBlocks(blocks)
-  for oreIndex = 1, #blocks do
-    print(">>>", blocks[oreIndex][0].name)
-    for block_data in pairs(blocks[oreIndex]) do
+  for Types in pairs(blocks) do
+    for block_data in pairs(blocks[Types]) do
+      print(block_data.name, " >>> ", block_data.x, block_data.y, block_data.z)
       goTo(block_data.x, block_data.y, block_data.z)
     end
   end
