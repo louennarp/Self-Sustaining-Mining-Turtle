@@ -418,7 +418,7 @@ function main()
   	return
   end
 
-  xDir,zDir = getDir()
+  --xDir,zDir = getDir()
 
   print( "Excavating..." )
   done = false
