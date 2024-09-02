@@ -32,8 +32,8 @@ local function scan(n)
   turtle.equipLeft()
   turtle.select(initSlot)
 
-  for block_data in pairs(scan) do
-    block_data.x, block_data.y, block_data.z = local_to_global(block_data.x, block_data.y, block_data.z)
+  for block_data_index in pairs(scan) do
+    scan[block_data_index].x, scan[block_data_index].y, scan[block_data_index].z = local_to_global(scan[block_data_index].x, scan[block_data_index].y, scan[block_data_index].z)
   end
   return scan
 end
