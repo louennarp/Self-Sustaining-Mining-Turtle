@@ -31,11 +31,11 @@ local function scan(n)
   local scan = geoscanner.scan(10)
   turtle.equipLeft()
   turtle.select(initSlot)
-  """
-  for i, block_data in ipairs(scan) do
-    block_data.x, block_data.y, block_data.z = local_to_global(block_data.x, block_data.y, block_data.z)
-  end
-  """
+
+  --for i, block_data in ipairs(scan) do
+  --  block_data.x, block_data.y, block_data.z = local_to_global(block_data.x, block_data.y, block_data.z)
+  --end
+
   return scan
 end
 
