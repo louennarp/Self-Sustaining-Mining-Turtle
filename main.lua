@@ -320,7 +320,7 @@ end
 
 function goMineBlocks(blocks)
   for Types in pairs(blocks) do
-    for block_data in pairs(blocks[Types]) do
+    for block_data in pairs(Types) do
       print(block_data.name, " >>> ", block_data.x, block_data.y, block_data.z)
       goTo(block_data.x, block_data.y, block_data.z)
     end
