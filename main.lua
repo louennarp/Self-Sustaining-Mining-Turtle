@@ -432,7 +432,7 @@ function main()
   while not done do
     local s = relicateScaneToGlobale(scan(10))
     print(#s)
-    if #s = 0 then
+    if #s == 0 then
       for i=1,10 do
         tryForwards()
       end
