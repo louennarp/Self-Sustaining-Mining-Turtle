@@ -17,7 +17,7 @@ local refuel -- Filled in further down
 local function local_to_global(bX, bY, bZ)
   local globalX = xPos + bX * xDir + bZ * zDir
   local globalY = depth - bY
-  local globalZ = zPos - bX * zDir + bZ * xDir
+  local globalZ = zPos - bX * zDir - bZ * xDir
   return globalX, globalY, globalZ
 end
 
@@ -35,9 +35,7 @@ end
 
 local function relicateScaneToGlobale (scan)
   for i, block_data in ipairs(scan) do
-    print("Local: ", block_data.x, block_data.y, block_data.z)
     block_data.x, block_data.y, block_data.z = local_to_global(block_data.x, block_data.y, block_data.z)
-    print("Global: ", block_data.x, block_data.y, block_data.z)
   end
   return scan
 end
