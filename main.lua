@@ -152,7 +152,7 @@ function refuel(ammount)
 		return true
 	end
 
-	local needed = ammount
+	local needed = ammount or fuelLowLimit
 	if turtle.getFuelLevel() < needed then
 		for n=1,16 do
 			if turtle.getItemCount(n) > 0 then
