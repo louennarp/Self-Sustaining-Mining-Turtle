@@ -17,12 +17,10 @@ local refuel -- Filled in further down
 local function local_to_global(bX, bY, bZ)
   local globalX, globalY, globalZ
   if xDir ~= 0 then
-    print("@1")
     globalX = xPos + bX -- * xDir + bZ * zDir
     globalY = depth - bY
     globalZ = zPos - bZ -- * xDir  - bX * zDir
   else
-    print("@2")
     globalX = xPos - bX -- * xDir + bZ * zDir
     globalY = depth - bY
     globalZ = zPos + bZ -- * xDir  - bX * zDir
@@ -433,7 +431,12 @@ function main()
   done = false
   while not done do
     local s = relicateScaneToGlobale(scan(10))
-    if not refuel(fuelHightLimit) then
+    print(#s)
+    if #s = 0 then
+      for i=1,10 do
+        tryForwards()
+      end
+    elseif not refuel(fuelHightLimit) then
       goMineBlocks(selectCoal(s))
     else
       goMineBlocks(selectOres(s))
