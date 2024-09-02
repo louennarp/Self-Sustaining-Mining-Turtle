@@ -32,7 +32,7 @@ local function scan(n)
   turtle.equipLeft()
   turtle.select(initSlot)
 
-  for i, block_data in ipairs(scan) do
+  for block_data in pairs(scan) do
     block_data.x, block_data.y, block_data.z = local_to_global(block_data.x, block_data.y, block_data.z)
   end
   return scan
@@ -40,7 +40,7 @@ end
 
 function selectCoal (scan)
   coals = {}
-  for i, block_data in ipairs(scan) do
+  for block_data in pairs(scan) do
     if block_data.name == "minecraft:coal_ore" or block_data.name == "minecraft:deepslate_coal_ore" then
       print("Coal found at:", block_data.x, block_data.y, block_data.z)
       table.insert(coals, {block_data})
@@ -319,12 +319,9 @@ function goTo( x, y, z, xd, zd )
 end
 
 function goMineBlocks(blocks)
-  print(blocks)
-  for i, ores in ipairs(blocks) do
-    if ores[1] then
-      print(">>>", ores[1].name)
-    end
-    for j, block_data in ipairs(ores) do
+  for oreIndex = 0, #blocks do
+    print(">>>", blocks[oreIndex][1].name)
+    for block_data in pairs(blocks[oreIndex]) do
       goTo(block_data.x, block_data.y, block_data.z)
     end
   end
