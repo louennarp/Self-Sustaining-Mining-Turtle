@@ -379,7 +379,7 @@ function goTo( x, y, z, xd, zd )
   end
 end
 
-function goMineBlocks(blocks)
+local function goMineBlocks(blocks)
   for i, ores in ipairs(blocks) do
     for j, block_data in ipairs(ores) do
       print(block_data.name, ">>>", block_data.x, block_data.y, block_data.z)
@@ -388,7 +388,7 @@ function goMineBlocks(blocks)
   end
 end
 
-local getDir()
+local function getDir()
   while not turtle.detectDown() do
     tryDown()
   end
