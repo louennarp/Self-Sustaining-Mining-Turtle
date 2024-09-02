@@ -31,16 +31,14 @@ local function scan(n)
   local scan = geoscanner.scan(10)
   turtle.equipLeft()
   turtle.select(initSlot)
-
-  for i, block_data in ipairs(scan) do
-    block_data.x, block_data.y, block_data.z = local_to_global(block_data.x, block_data.y, block_data.z)
-  end
-
   return scan
 end
 
-local getFacing()
-
+local function relicateScaneToGlobale (scan)
+  for i, block_data in ipairs(scan) do
+    block_data.x, block_data.y, block_data.z = local_to_global(block_data.x, block_data.y, block_data.z)
+  end
+  return scan
 end
 
 function selectCoal (scan)
@@ -218,6 +216,64 @@ local function tryForwards()
 	return true
 end
 
+local function tryDown()
+	if not refuel() then
+		print( "Not enough Fuel" )
+		returnSupplies()
+	end
+
+	while not turtle.down() do
+		if turtle.detectDown() then
+			if turtle.digDown() then
+				if not collect() then
+					returnSupplies()
+				end
+			else
+				return false
+			end
+		elseif turtle.attackDown() then
+			if not collect() then
+				returnSupplies()
+			end
+		else
+			sleep( 0.5 )
+		end
+	end
+
+	depth = depth + 1
+
+	return true
+end
+
+local function tryUp()
+	if not refuel() then
+		print( "Not enough Fuel" )
+		returnSupplies()
+	end
+
+	while not turtle.up() do
+		if turtle.detectUp() then
+			if turtle.digUp() then
+				if not collect() then
+					returnSupplies()
+				end
+			else
+				return false
+			end
+		elseif turtle.attackUp() then
+			if not collect() then
+				returnSupplies()
+			end
+		else
+			sleep( 0.5 )
+		end
+	end
+
+	depth = depth - 1
+
+	return true
+end
+
 local function turnLeft()
 	turtle.turnLeft()
 	xDir, zDir = -zDir, xDir
@@ -332,6 +388,31 @@ function goMineBlocks(blocks)
   end
 end
 
+local getDir()
+  while not turtle.detectDown() do
+    tryDown()
+  end
+  while not turtle.detect() do
+    tryForwards()
+  end
+  turnLeft()
+  turtle.dig()
+  turnLeft()
+  turtle.dig()
+  turnLeft()
+  turtle.dig()
+  turnLeft()
+  local scaneOne = scan(2)
+
+  for i, block_data in ipairs(scan) do
+    if math.abs(block_data.x) + math.abs(block_data.z) = 1 then
+      print("obj found")
+      xDir,zDir = block_data.x, block_data.z
+    end
+  end
+
+end
+
 function main()
   if not refuel(fuelHightLimit) then
   	print( "Out of Fuel" )
@@ -341,7 +422,7 @@ function main()
   print( "Excavating..." )
   done = false
   while not done do
-    local s = scan(10)
+    local s = relicateScaneToGlobale(scan(10))
     if not refuel(fuelHightLimit) then
       goMineBlocks(selectCoal(s))
     else
