@@ -7,7 +7,7 @@ local collected = 0
 
 local depth = 0
 local xPos,zPos = 0,0
-local xDir,zDir = 0,1
+local xDir,zDir = 1,0
 
 local fuelLowLimit, fuelHightLimit = 1000, 3000
 
@@ -18,7 +18,7 @@ local function local_to_global (bX, bY, bZ)
   local x, y, z
   y = depth - bY
   x = xPos + bX * xDir + bZ * zDir
-  z = zPos + bX * zDir - bZ * xDir
+  z = zPos - bX * zDir + bZ * xDir
   return x, y, z
 end
 
