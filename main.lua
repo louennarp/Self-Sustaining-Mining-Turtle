@@ -405,7 +405,7 @@ local function getDir()
 
   for i, block_data in ipairs(scan) do
     if math.abs(block_data.x) + math.abs(block_data.z) == 1 then
-      print("obj found : ", block_data.x, block_data.z)
+      print("obj found : [", block_data.x, block_data.z,"]")
       return block_data.x, block_data.z
     end
   end
