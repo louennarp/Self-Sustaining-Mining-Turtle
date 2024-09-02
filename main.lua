@@ -17,7 +17,7 @@ local refuel -- Filled in further down
 local function local_to_global(bX, bY, bZ)
   local globalX = xPos + bX -- * xDir + bZ * zDir
   local globalY = depth - bY
-  local globalZ = zPos + bZ -- * xDir  - bX * zDir
+  local globalZ = -zPos - bZ -- * xDir  - bX * zDir
   return globalX, globalY, globalZ
 end
 
@@ -405,7 +405,7 @@ local function getDir()
 
   for i, block_data in ipairs(scan) do
     if math.abs(block_data.x) + math.abs(block_data.z) == 1 then
-      print("obj found : [", block_data.x, block_data.z,"]")
+      print("obj found : [", block_data.x, -block_data.z,"]")
       return block_data.x, -block_data.z
     end
   end
