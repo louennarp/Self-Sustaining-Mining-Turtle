@@ -16,9 +16,9 @@ local refuel -- Filled in further down
 
 local function local_to_global (bX, bY, bZ)
   local x, y, z
-  y = bY - depth
-  x = xPos + bZ * xDir - bX * zDir
-  z = zPos + bZ * zDir + bX *  xDir
+  y = depth - bY
+  x = xPos + bZ * xDir + bX * zDir
+  z = zPos - bZ * zDir + bX *  xDir
   return x, y, z
 end
 
