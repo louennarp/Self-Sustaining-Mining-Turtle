@@ -319,7 +319,7 @@ function goTo( x, y, z, xd, zd )
 end
 
 function goMineBlocks(blocks)
-  for oreIndex = 0, #blocks do
+  for oreIndex = 1, #blocks do
     print(">>>", blocks[oreIndex][1].name)
     for block_data in pairs(blocks[oreIndex]) do
       goTo(block_data.x, block_data.y, block_data.z)
