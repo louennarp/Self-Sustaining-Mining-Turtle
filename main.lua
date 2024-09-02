@@ -7,7 +7,7 @@ local collected = 0
 
 local depth = 0
 local xPos,zPos = 0,0
-local xDir,zDir = 1,0
+local xDir,zDir = -1,0
 
 local fuelLowLimit, fuelHightLimit = 1000, 3000
 
@@ -32,9 +32,9 @@ local function scan(n)
   turtle.equipLeft()
   turtle.select(initSlot)
 
-  --for i, block_data in ipairs(scan) do
-  --  block_data.x, block_data.y, block_data.z = local_to_global(block_data.x, block_data.y, block_data.z)
-  --end
+  for i, block_data in ipairs(scan) do
+    block_data.x, block_data.y, block_data.z = local_to_global(block_data.x, block_data.y, block_data.z)
+  end
 
   return scan
 end
