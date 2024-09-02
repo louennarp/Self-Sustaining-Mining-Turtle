@@ -18,7 +18,7 @@ local function local_to_global (bX, bY, bZ)
   local x, y, z
   y = depth - bY
   x = xPos + bX * xDir + bZ * zDir
-  z = zPos - bX * zDir + bZ * xDir
+  z = zPos + bX * zDir - bZ * xDir
   return x, y, z
 end
 
