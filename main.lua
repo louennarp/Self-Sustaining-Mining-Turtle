@@ -431,15 +431,16 @@ function main()
   done = false
   while not done do
     local s = relicateScaneToGlobale(scan(10))
-    print(#s)
-    if #s == 0 then
+    ores = selectOres(s)
+    print(#ores)
+    if #ores == 0 then
       for i=1,10 do
         tryForwards()
       end
     elseif not refuel(fuelHightLimit) then
       goMineBlocks(selectCoal(s))
     else
-      goMineBlocks(selectOres(s))
+      goMineBlocks(ores)
     end
   end
 end
