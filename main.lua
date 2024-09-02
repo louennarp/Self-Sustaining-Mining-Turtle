@@ -7,7 +7,7 @@ local collected = 0
 
 local depth = 0
 local xPos,zPos = 0,0
-local xDir,zDir = -1,0
+local xDir,zDir = 0,1
 
 local fuelLowLimit, fuelHightLimit = 1000, 3000
 
@@ -16,7 +16,7 @@ local refuel -- Filled in further down
 
 local function local_to_global (bX, bY, bZ)
   local x, y, z
-  y = depth - bY
+  y = bY - depth
   x = xPos + bZ * xDir - bX * zDir
   z = zPos + bZ * zDir + bX *  xDir
   return x, y, z
@@ -37,6 +37,10 @@ local function scan(n)
   end
 
   return scan
+end
+
+local getFacing()
+
 end
 
 function selectCoal (scan)
@@ -67,7 +71,7 @@ function selectOres (scan)
       local oreType = elementIndexInArray(oreTypes, block_data.name)
       if oreType == nil then
         table.insert(oreTypes, block_data.name)
-        table.insert(ores, {})
+        table.insert(ores, {block_data})
         print(block_data.name, "found at:", block_data.x, block_data.y, block_data.z)
       else
         table.insert(ores[oreType], block_data)
