@@ -15,9 +15,16 @@ local goTo -- Filled in further down
 local refuel -- Filled in further down
 
 local function local_to_global(bX, bY, bZ)
-  local globalX = xPos + bX -- * xDir + bZ * zDir
-  local globalY = depth - bY
-  local globalZ = zPos - bZ -- * xDir  - bX * zDir
+  local globalX, globalY, globalZ
+  if xDir then
+    globalX = xPos + bX -- * xDir + bZ * zDir
+    globalY = depth - bY
+    globalZ = zPos - bZ -- * xDir  - bX * zDir
+  else
+    globalX = xPos - bX -- * xDir + bZ * zDir
+    globalY = depth - bY
+    globalZ = zPos + bZ -- * xDir  - bX * zDir
+  end
   return globalX, globalY, globalZ
 end
 
