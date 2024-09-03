@@ -87,6 +87,7 @@ end
 
 local function unload( _bKeepOneFuelStack )
 	print( "Unloading items..." )
+  turtle.digUp()
   turtle.select(endStragePos)
   turtle.placeUp()
 	for n=1,14 do
@@ -433,12 +434,13 @@ function main()
     local s = relicateScaneToGlobale(scan(10))
     ores = selectOres(s)
     print(#ores)
-    if #ores == 0 then
+
+    if not refuel(fuelHightLimit) then
+      goMineBlocks(selectCoal(s))
+    elseif #ores == 0 then
       for i=1,10 do
         tryForwards()
       end
-    elseif not refuel(fuelHightLimit) then
-      goMineBlocks(selectCoal(s))
     else
       goMineBlocks(ores)
     end
