@@ -106,6 +106,7 @@ local function unload( _bKeepOneFuelStack )
 		end
 	end
 	collected = 0
+  turtle.digUp()
 	turtle.select(1)
 end
 
